@@ -1,16 +1,18 @@
-const { Survey, Response, User } = require("../models");
+const { Survey } = require("../models/Survey");
+const { Response } = require("../models/response");
+const { User } = require("../models/User");
 
-// create a new survey
+// Controller to create a new survey
 const createSurvey = async (req, res) => {
   const { question, options } = req.body;
-  const createdBy = req.User.id;
+  const createdBy = req.user.id; // Assuming you have user information in the request's user object
 
   try {
     const newSurvey = await Survey.create({ question, options, createdBy });
     res.status(201).json(newSurvey);
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ error: "Failed to create a survey" });
+    console.error(error);
+    res.status(500).json({ error: "Failed to create survey" });
   }
 };
 

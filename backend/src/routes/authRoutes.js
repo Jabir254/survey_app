@@ -5,7 +5,7 @@ const authMiddleware = require("../middleware/authMiddleware");
 const router = express.Router();
 
 //register a new user
-router.post("/regiser", authController.registerUser);
+router.post("/register", authController.registerUser);
 
 //authenticate and log in user
 router.post("/login", authController.loginUser);

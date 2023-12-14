@@ -3,11 +3,15 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const authRoutes = require("./src/routes/authRoutes");
 const surveyRoutes = require("./src/routes/surveyRoutes");
+const connectDB = require("./src/utils/db");
 
 require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+//connect to MongoDB
+connectDB();
 
 //middleware
 app.use(cors());

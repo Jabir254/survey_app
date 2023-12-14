@@ -42,7 +42,8 @@ const loginUser = async (req, res) => {
       return res.status(401).json({ error: "Invalid username or password" });
     }
     //compare the password
-    const pwMatch = await bcrypt.compare(password, user.password);
+    const psword = password.toString();
+    const pwMatch = await bcrypt.compare(psword, user.password);
     if (!pwMatch) {
       return res.status(401).json({ erro: "invalid username or password" });
     }

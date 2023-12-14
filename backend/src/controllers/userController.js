@@ -1,28 +1,32 @@
 const bcrypt = require("bcrypt");
-const User  = require("../models/User");
+const User = require("../models/User");
 
 //register new user
 const registerUser = async (req, res) => {
-  const { username, email, password } = req.body;
-
   try {
-    //if username is already taken
-    const existingUser = await User.findOne({ username });
+    const { username, email, password } = req.body;
+
+    // Check if the email is already taken
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.status(400).json({ error: "username is already taken" });
+      return res.status(400).json({ error: "Email is already taken" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash the password
+    const newPassword = password.toString();
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
 
+    // Create a new user
     const newUser = await User.create({
       username,
       email,
       password: hashedPassword,
     });
 
+    // Respond with the created user
     res.status(201).json(newUser);
   } catch (error) {
-    console.error(error);
+    console.error("Error during user registration:", error);
     res.status(500).json({ error: "Failed to register user" });
   }
 };

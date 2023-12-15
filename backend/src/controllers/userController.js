@@ -7,7 +7,7 @@ const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
 
     // Check if the email is already taken
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email, username });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already taken" });
     }
@@ -41,15 +41,25 @@ const loginUser = async (req, res) => {
     if (!user) {
       return res.status(401).json({ error: "Invalid username or password" });
     }
-    //compare the password
-    const psword = password.toString();
-    const pwMatch = await bcrypt.compare(psword, user.password);
+
+    // ensure both the stored password and the input password are strings
+    const storedPassword = user.password.toString(); // convert to string if not already
+    const inputPassword = password.toString(); // convert to string if not already
+
+    // compare the password
+    const pwMatch = await bcrypt.compare(inputPassword, storedPassword);
+
     if (!pwMatch) {
-      return res.status(401).json({ erro: "invalid username or password" });
+      return res.status(401).json({ error: "Invalid username or password" });
     }
+
+    // Passwords match, you can proceed with login logic here
+
+    // Example: return a success response
+    res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ erro: "Failed to login" });
+    res.status(500).json({ error: "Failed to login" });
   }
 };
 

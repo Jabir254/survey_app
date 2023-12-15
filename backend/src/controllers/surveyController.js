@@ -1,6 +1,6 @@
-const { Survey } = require("../models/Survey");
-const { Response } = require("../models/response");
-const { User } = require("../models/User");
+const  Survey  = require("../models/Survey");
+const  Response  = require("../models/response");
+const  User  = require("../models/User");
 
 // Controller to create a new survey
 const createSurvey = async (req, res) => {

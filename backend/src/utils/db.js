@@ -6,11 +6,15 @@ const connectionParams = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
-mongoose
-  .connect(url, connectionParams)
-  .then(() => {
-    console.log("Connected to the MongoDB database ");
-  })
-  .catch((err) => {
-    console.error(`Error connecting to the database. n${err}`);
-  });
+const connectDB = (async) => {
+  mongoose
+    .connect(url, connectionParams)
+    .then(() => {
+      console.log("Connected to the MongoDB database ");
+    })
+    .catch((err) => {
+      console.error(`Error connecting to the database. n${err}`);
+    });
+};
+
+module.exports = connectDB;

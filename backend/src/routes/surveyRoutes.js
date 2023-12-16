@@ -6,7 +6,7 @@ const router = express.Router();
 
 //create a new survey
 router.post(
-  "/",
+  "/create",
   authMiddleware.authenticateUser,
   surveyController.createSurvey
 );

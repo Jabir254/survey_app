@@ -15,7 +15,7 @@ router.post(
 router.get("/", surveyController.getAllSurveys);
 
 //get a specific survey by ID
-router.get("/:id", surveyController.getSurveyById);
+//router.get("/:id", surveyController.getSurveyById);
 
 // to submit a response to a survey
 router.post(

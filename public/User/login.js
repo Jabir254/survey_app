@@ -9,7 +9,7 @@ async function registerUser() {
 
   try {
     // Make a POST request using Axios
-    const response = await axios.post('/register', { username, email, password });
+    const response = await axios.post('/auth/register', { username, email, password });
 
     // Handle the response
     alert('Registration successful!');
@@ -27,7 +27,7 @@ async function loginUser() {
 
   try {
     // Make a POST request using Axios
-    const response = await axios.post('/login', { username: loginUsername, password: loginPassword });
+    const response = await axios.post('/auth/login', { username: loginUsername, password: loginPassword });
 
     // Handle the response
     alert('Login successful!');
